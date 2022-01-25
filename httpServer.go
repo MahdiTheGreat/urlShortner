@@ -79,12 +79,12 @@ func main() {
 	exp, _ := strconv.Atoi(expTemp)
 	client := redis.NewClient(&redis.Options{
 		Addr:     dbHost + ":" + dbPort,
-		Password: "",
+		Password: pass,
 		DB:       0,
 	})
 	println(client.Ping().String())
 	d := data{client: client, host: host, exp: exp}
-	e.POST("/urlShortner/:url", d.Post)
+	e.GET("/urlShortner/:url", d.Post)
 	e.GET("/shortUrl/:shortUrlVal", d.Get)
 	add := "0.0.0.0:" + port
 	println("add is" + add)
