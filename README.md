@@ -149,13 +149,13 @@ Building dependency tree
 Reading state information... Done
 curl is already the newest version (7.68.0-1ubuntu2.7).
 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
-root@5cdb8ea19a6b:/# curl google.com
+root@5cdb8ea19a6b:/# curl google.com</code>
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
 <TITLE>301 Moved</TITLE></HEAD><BODY>
 <H1>301 Moved</H1>
 The document has moved
 <A HREF="http://www.google.com/">here</A>.
-</BODY></HTML></code>
+</BODY></HTML>
 
 
 
