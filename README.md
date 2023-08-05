@@ -119,7 +119,6 @@ redis-db-autoscaler    Deployment/redis-master   <unknown>/100Mi, <unknown>/50% 
 We can test our project by using port forwarding of the service created for the project or by using an image with curl capability. For more realism we will use the second method. In the first step, we need to create a docker image based on ubuntu which has the curl command. Then upload the created image on Dockerhub and finally, in order to test it, with the help of the docker rum command, get the image from your Dockerhub and create a container from it, and by sending a curl request to Google.com we test it, which can be see in the command log below:
 
 1)
-
 <code>C:\Users\Mahdi>docker commit 50fb08c1a73c ubuntu-upgraded:1.0
 sha256:0ea18b5b83c2fcc5d6ff0fae392899555f29e2d5d497266b61276a284e6e407cC:\Windows\system32>docker push mahdithegreat/ubuntu-upgraded:1.0
 C:\cloud Computing\dockerProject\playGround>docker image ls
@@ -134,7 +133,6 @@ The push refers to repository [docker.io/mahdithegreat/ubuntu-upgraded]
 1.0: digest: sha256:279a6bc53ac2de4ba92c1c44a025581b0a6386a2e6553e881080a1ddaf1d3f02 size: 741</code>
 
 2)
-
 <code>C:\cloud Computing\dockerProject\playGround>docker pull mahdithegreat/ubuntu-upgraded:1.0
 1.0: Pulling from mahdithegreat/ubuntu-upgraded
 Digest: sha256:279a6bc53ac2de4ba92c1c44a025581b0a6386a2e6553e881080a1ddaf1d3f02
@@ -142,7 +140,6 @@ Status: Downloaded newer image for mahdithegreat/ubuntu-upgraded:1.0
 docker.io/mahdithegreat/ubuntu-upgraded:1.0</code>
 
 3)
-
 <code>root@5cdb8ea19a6b:/# apt-get install curl -y
 Reading package lists... Done
 Building dependency tree
@@ -150,12 +147,7 @@ Reading state information... Done
 curl is already the newest version (7.68.0-1ubuntu2.7).
 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
 root@5cdb8ea19a6b:/# curl google.com</code>
-<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
-<TITLE>301 Moved</TITLE></HEAD><BODY>
-<H1>301 Moved</H1>
-The document has moved
-<A HREF="http://www.google.com/">here</A>.
-</BODY></HTML>
+
 
 
 
