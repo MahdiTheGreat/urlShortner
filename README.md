@@ -34,9 +34,7 @@ We also use a secret file, which is responsible for storing the name and passwor
 
 For implementation, we use a Dockerfile by which the project can be containerized. Finally, by building the Dockerfile, we generate the project image and place it on Dockerhub. To create an image, we use the multistage build technique, in which the first step is to build your project and create an executable file so that this file can be executed in an Alpine container in the second step. The console log of this process can be seen below:
 
-<div>
-<code>C:\urlShortner>docker build -t mahdithegreat/redis-app:5.0 .
-[+] Building 67.0s (18/18) FINISHED
+<code>C:\urlShortner>docker build -t mahdithegreat/redis-app:5.0 .[+] Building 67.0s (18/18) FINISHED
  => [internal] load build definition from Dockerfile                                                               0.1s
  => => transferring dockerfile: 32B                                                                                0.1s
  => [internal] load .dockerignore                                                                                  0.1s
@@ -69,7 +67,6 @@ The push refers to repository [docker.io/mahdithegreat/redis-app]
 789c9843f753: Layer already exists                                                                                      
 8d3ac3489996: Layer already exists                                                                                      
 5.0: digest: sha256:50b2b0a4b1e5d6f3bc437589d3c2d3f17620f20af153c94981f154435add032f size: 1155</code>
-</div>
 
 In order to keep the database information persistent in the event of a problem with the respective pods, it is necessary to define a persistent volume for it. As a result, the next step is to create a Persistent Volume and then create a Persistent Volume Claim to use it.
 Then we need to write a deployment file that is responsible for preparing and maintaining the database (which uses the password defined in Secret).
