@@ -60,9 +60,11 @@ C:\urlShortner>docker build -t mahdithegreat/redis-app:5.0 .
  => => exporting layers                                                                                            0.2s
  => => writing image sha256:69cd7fca87cdcd213ead2d4b2295d306f4a081f735585f168635d9005fe86bee                       0.0s
  => => naming to docker.io/mahdithegreat/redis-app:5.0                                                             0.0s
+ </code>
 
 Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
 
+<code>
 C:\urlShortner>docker push mahdithegreat/redis-app:5.0
 The push refers to repository [docker.io/mahdithegreat/redis-app]
 419d089b0938: Pushed                                                                                                    
@@ -85,6 +87,7 @@ The last thing we need to create is a service that can be used to access the pro
  
 After using the deployment and service files by the kubectl apply command on the minikube cluster, To confirm the creation of pods, services, and deployments and the usage of config and secret files, we use several commands which can be seen in the command log below:
 
+<code>
 C:\cloud Computing\finalProject>kubectl get pods
 NAME                            READY   STATUS    RESTARTS   AGE
 alpine-test-7fccc6698f-lnb5f    1/1     Running   0          4h21m
@@ -113,15 +116,18 @@ C:\urlShortner>kubectl get secrets
 NAME                  TYPE                                  DATA   AGE
 default-token-nxsc6   kubernetes.io/service-account-token   3      3d10h
 pass-secret           Opaque                                1      28h
+</code>
 
 keep in mind that for the deployment related to the database we used one pod ,however, we could have used more pods since Redis masters update each other and perhaps in the real world it's better to have several pods for database implementation.
 
 Next, we create two HPA components in the Kubernetes cluster in order to perform auto-scaling operations for both the databases and the pods that are handling requests. The parameters used for autoscaling include average CPU utilization and memory and the reason we chose these parameters is that they are the most basic parameters and both the database and pods handling the requests require both CPU ( in databases for finding the value associated with the key and in pods for handling requests) and memory(in databases for loading the data on to the ram for faster response and in pods for storing the request messages).
 
+<code>
 C:\urlShortner>kubectl get hpa
 NAME                   REFERENCE                 TARGETS                          MINPODS   MAXPODS   REPLICAS   AGE
 redis-app-autoscaler   Deployment/redis-app      <unknown>/100Mi, <unknown>/50%   2         5         2          8m19s
 redis-db-autoscaler    Deployment/redis-master   <unknown>/100Mi, <unknown>/50%   1         5         1          8m29s
+</code>
 
 
 
