@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment                 # Type of Kubernetes resource
+metadata:
+  name: redis-app             # Unique name of the Kubernetes resource
+spec:
+  replicas: 2                    # Number of pods to run at any given time
+  selector:
+    matchLabels:
+      app: redis-app          # This deployment applies to any Pods matching the specified label
+  template:                      # This deployment will create a set of pods using the configurations in this template
+    metadata:
+      labels:                    # The labels that will be applied to all of the pods in this deployment
+        app: redis-app 
+    spec:
+      containers:
+      - name: redis-app
+        image: mahdithegreat/redis-app:5.0
+        envFrom:
+          - configMapRef:
+              name: host-port-dbhost-dbport-exp
+        ports:
+          - containerPort: 9000
+        env:                     # Environment variables passed to the container
+          - name: pass
+            valueFrom:
+               secretKeyRef:
+                   name: pass-secret
+                   key: pass              
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+         
+          

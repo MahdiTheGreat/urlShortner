@@ -11,11 +11,15 @@ import (
 	"time"
 )
 
-func (d data) Post(c echo.Context) error {
-	url := c.Param("url")
+func (d data) Post(c echo.Context) (err error) {
+
+	// To avoid security flaws try to avoid passing bound structs directly to other methods
+	// if these structs contain fields that should not be bindable.
 	client := d.client
 	host := d.host
 	exp := d.exp
+	port := d.port
+	url := c.FormValue("url")
 	log.Println("received url in post is")
 	log.Println(url)
 	date := time.Now().Format("01-02-2006 15:04:05")
@@ -36,7 +40,7 @@ func (d data) Post(c echo.Context) error {
 	print("key value is")
 	print(date + " " + url)
 	client.Set(date, url, time.Duration(exp)*time.Second)
-	shortUrl := host + "/" + date
+	shortUrl := host + ":" + port + "/" + date
 	return c.String(http.StatusOK, shortUrl)
 }
 
@@ -59,12 +63,19 @@ func (d data) Get(c echo.Context) error {
 type data struct {
 	client *redis.Client
 	host   string
+	port   string
 	exp    int
 }
 
 func main() {
 	e := echo.New()
 	dbHost := os.Getenv("dbHost")
+	//host, err := os.Hostname()
+	//if err != nil {
+	//	panic(err)
+	//	host = "urlShortner"
+
+	//}
 	host := os.Getenv("host")
 	port := os.Getenv("port")
 	dbPort := os.Getenv("dbPort")
@@ -83,12 +94,11 @@ func main() {
 		DB:       0,
 	})
 	println(client.Ping().String())
-	d := data{client: client, host: host, exp: exp}
-	e.GET("/urlShortner/:url", d.Post)
-	e.GET("/shortUrl/:shortUrlVal", d.Get)
+	d := data{client: client, host: host, port: port, exp: exp}
+	e.POST("", d.Post)
+	e.GET("/:shortUrlVal", d.Get)
 	add := "0.0.0.0:" + port
 	println("add is" + add)
-
 	if err := e.Start(add); err != nil {
 		log.Fatal(err)
 	}

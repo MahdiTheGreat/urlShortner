@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: host-port-dbhost-dbport-exp
+data:
+
+  host: redis-app-service
+  port: "9000"
+  dbHost: redis-master-0.redis-master-headless
+  dbPort: "6379"
+  exp: "1000"
+    
+
+  
