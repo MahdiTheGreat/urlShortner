@@ -61,12 +61,8 @@ For implementation, we use a Dockerfile by which the project can be containerize
  => => exporting layers                                                                                            0.2s
  => => writing image sha256:69cd7fca87cdcd213ead2d4b2295d306f4a081f735585f168635d9005fe86bee                       0.0s
  => => naming to docker.io/mahdithegreat/redis-app:5.0                                                             0.0s</code>
- </div>
-
 Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
-
-<div>
-<code>C:\urlShortner>docker push mahdithegreat/redis-app:5.0
+C:\urlShortner>docker push mahdithegreat/redis-app:5.0
 The push refers to repository [docker.io/mahdithegreat/redis-app]
 419d089b0938: Pushed                                                                                                    
 5f70bf18a086: Layer already exists                                                                                      
