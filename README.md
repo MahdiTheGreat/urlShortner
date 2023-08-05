@@ -34,7 +34,7 @@ We also use a secret file, which is responsible for storing the name and passwor
 
 For implementation, we use a Dockerfile by which the project can be containerized. Finally, by building the Dockerfile, we generate the project image and place it on Dockerhub. To create an image, we use the multistage build technique, in which the first step is to build your project and create an executable file so that this file can be executed in an Alpine container in the second step. The console log of this process can be seen below:
 
-<code>C:\urlShortner>docker build -t mahdithegreat/redis-app:5.0 .[+] Building 67.0s (18/18) FINISHED
+<div>C:\urlShortner>docker build -t mahdithegreat/redis-app:5.0 .[+] Building 67.0s (18/18) FINISHED
  => [internal] load build definition from Dockerfile                                                               0.1s
  => => transferring dockerfile: 32B                                                                                0.1s
  => [internal] load .dockerignore                                                                                  0.1s
@@ -66,7 +66,7 @@ The push refers to repository [docker.io/mahdithegreat/redis-app]
 5f70bf18a086: Layer already exists                                                                                      
 789c9843f753: Layer already exists                                                                                      
 8d3ac3489996: Layer already exists                                                                                      
-5.0: digest: sha256:50b2b0a4b1e5d6f3bc437589d3c2d3f17620f20af153c94981f154435add032f size: 1155</code>
+5.0: digest: sha256:50b2b0a4b1e5d6f3bc437589d3c2d3f17620f20af153c94981f154435add032f size: 1155</div>
 
 In order to keep the database information persistent in the event of a problem with the respective pods, it is necessary to define a persistent volume for it. As a result, the next step is to create a Persistent Volume and then create a Persistent Volume Claim to use it.
 Then we need to write a deployment file that is responsible for preparing and maintaining the database (which uses the password defined in Secret).
@@ -81,7 +81,7 @@ The last thing we need to create is a service that can be used to access the pro
  
 After using the deployment and service files by the kubectl apply command on the minikube cluster, To confirm the creation of pods, services, and deployments and the usage of config and secret files, we use several commands which can be seen in the command log below:
 
-<code>C:\cloud Computing\finalProject>kubectl get pods
+<div>C:\cloud Computing\finalProject>kubectl get pods
 NAME                            READY   STATUS    RESTARTS   AGE
 alpine-test-7fccc6698f-lnb5f    1/1     Running   0          4h21m
 redis-app-6b89cb5d54-cbdzd      1/1     Running   0          4m56s
@@ -108,16 +108,16 @@ kube-root-ca.crt              1      3d10h
 C:\urlShortner>kubectl get secrets
 NAME                  TYPE                                  DATA   AGE
 default-token-nxsc6   kubernetes.io/service-account-token   3      3d10h
-pass-secret           Opaque                                1      28h</code>
+pass-secret           Opaque                                1      28h</div>
 
 keep in mind that for the deployment related to the database we used one pod ,however, we could have used more pods since Redis masters update each other and perhaps in the real world it's better to have several pods for database implementation.
 
 Next, we create two HPA components in the Kubernetes cluster in order to perform auto-scaling operations for both the databases and the pods that are handling requests. The parameters used for autoscaling include average CPU utilization and memory and the reason we chose these parameters is that they are the most basic parameters and both the database and pods handling the requests require both CPU ( in databases for finding the value associated with the key and in pods for handling requests) and memory(in databases for loading the data on to the ram for faster response and in pods for storing the request messages).
 
-<code>C:\urlShortner>kubectl get hpa
+<div>C:\urlShortner>kubectl get hpa
 NAME                   REFERENCE                 TARGETS                          MINPODS   MAXPODS   REPLICAS   AGE
 redis-app-autoscaler   Deployment/redis-app      <unknown>/100Mi, <unknown>/50%   2         5         2          8m19s
-redis-db-autoscaler    Deployment/redis-master   <unknown>/100Mi, <unknown>/50%   1         5         1          8m29s</code>
+redis-db-autoscaler    Deployment/redis-master   <unknown>/100Mi, <unknown>/50%   1         5         1          8m29s</div>
 
 
 
