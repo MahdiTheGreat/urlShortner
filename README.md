@@ -81,34 +81,30 @@ The last thing we need to create is a service that can be used to access the pro
  
 After using the deployment and service files by the kubectl apply command on the minikube cluster, To confirm the creation of pods, services, and deployments and the usage of config and secret files, we use several commands which can be seen in the command log below:
 
-<div>C:\cloud Computing\finalProject>kubectl get pods
+<code>C:\cloud Computing\finalProject>kubectl get pods
 NAME                            READY   STATUS    RESTARTS   AGE
 alpine-test-7fccc6698f-lnb5f    1/1     Running   0          4h21m
 redis-app-6b89cb5d54-cbdzd      1/1     Running   0          4m56s
 redis-app-6b89cb5d54-gj2dz      1/1     Running   0          4h21m
 redis-master-588d9c5554-7f8vr   1/1     Running   0          4h10m
-
 C:\urlShortner>kubectl get services
 NAME                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 kubernetes          ClusterIP   10.96.0.1       <none>        443/TCP          3d10h
 redis-app-service   NodePort    10.106.94.33    <none>        9000:32581/TCP   27h
 redis-master        ClusterIP   10.108.74.250   <none>        6379/TCP         2d10h
-
 C:\urlShortner>kubectl get deployments
 NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 alpine-test    1/1     1            1           4h22m
 redis-app      2/2     2            2           4h23m
 redis-master   1/1     1            1           4h44m
-
 C:\urlShortner>kubectl get configMaps
 NAME                          DATA   AGE
 host-port-dbhost-dbport-exp   5      9h
 kube-root-ca.crt              1      3d10h
-
 C:\urlShortner>kubectl get secrets
 NAME                  TYPE                                  DATA   AGE
 default-token-nxsc6   kubernetes.io/service-account-token   3      3d10h
-pass-secret           Opaque                                1      28h</div>
+pass-secret           Opaque                                1      28h</code>
 
 keep in mind that for the deployment related to the database we used one pod ,however, we could have used more pods since Redis masters update each other and perhaps in the real world it's better to have several pods for database implementation.
 
