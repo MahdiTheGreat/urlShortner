@@ -81,7 +81,7 @@ The last thing we need to create is a service that can be used to access the pro
  
 After using the deployment and service files by the kubectl apply command on the minikube cluster, To confirm the creation of pods, services, and deployments and the usage of config and secret files, we use several commands which can be seen in the command log below:
 
-C:\cloud Computing\finalProject>kubectl get pods
+<code>C:\cloud Computing\finalProject>kubectl get pods
 NAME                            READY   STATUS    RESTARTS   AGE
 alpine-test-7fccc6698f-lnb5f    1/1     Running   0          4h21m
 redis-app-6b89cb5d54-cbdzd      1/1     Running   0          4m56s
@@ -108,7 +108,7 @@ kube-root-ca.crt              1      3d10h
 C:\urlShortner>kubectl get secrets
 NAME                  TYPE                                  DATA   AGE
 default-token-nxsc6   kubernetes.io/service-account-token   3      3d10h
-pass-secret           Opaque                                1      28h
+pass-secret           Opaque                                1      28h</code>
 
 keep in mind that for the deployment related to the database we used one pod ,however, we could have used more pods since Redis masters update each other and perhaps in the real world it's better to have several pods for database implementation.
 
