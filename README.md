@@ -33,6 +33,7 @@ These configs are used when the main server is going up.
 We also use a secret file, which is responsible for storing the name and password of the database. Since this information, especially the password, is sensitive information, it should be stored in Secret.
 
 For implementation, we use a Dockerfile by which the project can be containerized. Finally, by building the Dockerfile, we generate the project image and place it on Dockerhub. To create an image, we use the multistage build technique, in which the first step is to build your project and create an executable file so that this file can be executed in an Alpine container in the second step. The console log of this process can be seen below:
+
 <code>C:\urlShortner>docker build -t mahdithegreat/redis-app:5.0 .
 [+] Building 67.0s (18/18) FINISHED
  => [internal] load build definition from Dockerfile                                                               0.1s
