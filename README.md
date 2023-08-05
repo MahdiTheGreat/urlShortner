@@ -148,6 +148,6 @@ curl is already the newest version (7.68.0-1ubuntu2.7).
 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
 root@5cdb8ea19a6b:/# curl google.com</code>
 
-
+After seeing if our curl works, then we can test our project with the commands specified at the beginning.
 
 
